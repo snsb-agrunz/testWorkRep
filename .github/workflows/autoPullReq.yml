@@ -1,0 +1,12 @@
+# This workflow will create a pull request when pushing to new branch "pushToPublic"
+name: create a pull request
+on: 
+  push:
+    branches:
+      - 'pushToPublic'
+jobs:
+  pushToPublic:
+    runs-on: ubuntu-latest
+    steps:
+    - name: create pull request
+      run: gh pr create -B main -H pushToPublic --title 'new public version'
