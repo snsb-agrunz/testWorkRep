@@ -10,3 +10,5 @@ jobs:
     steps:
     - name: create pull request
       run: gh pr create -B main -H pushToPublic --title 'new public version'
+      env:
+        GH_TOKEN: ${{ github.token }}
