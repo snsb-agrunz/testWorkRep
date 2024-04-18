@@ -9,6 +9,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: create pull request
-      run: gh pr create -B main -H pushToPublic --title 'new public version' --body ''
-      env:
-        GH_TOKEN: ${{ github.token }}
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const { repo, owner } = context.repo;
+          const result = await github.rest.pulls.create({
+            title: 'Neues Feature',
+            owner,
+            repo,
+            head: '${{ github.ref_name }}',
+            base: 'main',
+            body: [
+              'This PR is auto-generated'
+              ].join('\n')
+          });
